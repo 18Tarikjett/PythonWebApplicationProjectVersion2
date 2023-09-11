@@ -1,0 +1,13 @@
+{%extends 'home/base.html'%}
+{%block content%}
+    <body>{% for post in posts %}
+        <h1>
+            {{post.title}}
+            <p>By {{post.author}} on {{post.date_posted}}</p>
+        </h1>
+        {%endfor%}
+    </body>
+{%endblock content%}
+
+
+
