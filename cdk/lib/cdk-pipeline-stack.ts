@@ -50,7 +50,7 @@ export class CdkPipelineStack extends cdk.Stack {
       assumedBy: new iam.ServicePrincipal("codebuild.amazonaws.com"),
       description: `${this.stackName}-build-role`,
       inlinePolicies: {
-        "petclinic-code-build-policy": new iam.PolicyDocument({
+        "PythonWebApplicationProject-code-build-policy": new iam.PolicyDocument({
           statements: [
             new iam.PolicyStatement({
               effect: iam.Effect.ALLOW,
@@ -88,7 +88,7 @@ export class CdkPipelineStack extends cdk.Stack {
                 "ecr:PutImage"
               ],
               resources: [
-                `arn:${this.partition}:ecr:${this.region}:${this.account}:repository/petclinic`
+                `arn:${this.partition}:ecr:${this.region}:${this.account}:repository/PythonWebApplicationProject`
               ],
             }),
           ]

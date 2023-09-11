@@ -92,7 +92,7 @@ export class CdkInfraStack extends Stack {
         assumedBy: new iam.ServicePrincipal("build.apprunner.amazonaws.com"),
         description: `${this.stackName}-apprunner-role`,
         inlinePolicies: {
-          "petclinic-apprunner-policy": new iam.PolicyDocument({
+          "PythonWebApplicationProject-apprunner-policy": new iam.PolicyDocument({
             statements: [
               new iam.PolicyStatement({
                 effect: iam.Effect.ALLOW,
@@ -119,7 +119,7 @@ export class CdkInfraStack extends Stack {
                     this.region +
                     ":" +
                     this.account +
-                    ":repository/petclinic",
+                    ":repository/PythonWebApplicationProject",
                 ],
               }),
             ],

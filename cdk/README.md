@@ -1,4 +1,4 @@
-# CDK Project for Building and Deploying Petclinic App
+# CDK Project for Building and Deploying PythonWebApplicationProject App
 
 The `cdk.json` file tells the CDK Toolkit how to execute your app. Context variable for `app-name` is configured in this file.
 

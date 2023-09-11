@@ -1,4 +1,4 @@
-# PythonWebApplicationProject
+# PythonWebApplicationProjectProject
 Web application project in python for coursework 
 
 This is a Python web application which acts as a help desk ticket service. It utilizes django, docker and an assortment of other dependencies which depending on the environment being constructed on will need installation.

@@ -6,7 +6,7 @@ export class CdkPipelineInfraStage extends Stage {
   constructor(scope: Construct, id: string, props?: StageProps) {
     super(scope, id, props);
     new CdkInfraStack(this, "app", {
-      description: "Petclinic Deploy Infrastructure and App"
+      description: "PythonWebApplicationProject Deploy Infrastructure and App"
     });
   }
 }

@@ -1,14 +1,14 @@
-## Build and Deploy Spring Petclinic Application to AWS App Runner using AWS CDK.
+## Build and Deploy Spring PythonWebApplicationProject Application to AWS App Runner using AWS CDK.
 
 ## Overview
-Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Registry, AWS CodePipeline, AWS CodeCommit, AWS CodeBuild, AWS CodeDeploy and AWS CDK to deploy infrastructure as code and build out a CI/CD pipeline. We will use Spring Boot Petclinic application as a sample app to demonstrate the CI/CD pipeline. Petclinic is an MVC application built using Spring framework and leverages a relational database to persist the data.
+Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Registry, AWS CodePipeline, AWS CodeCommit, AWS CodeBuild, AWS CodeDeploy and AWS CDK to deploy infrastructure as code and build out a CI/CD pipeline. We will use Spring Boot PythonWebApplicationProject application as a sample app to demonstrate the CI/CD pipeline. PythonWebApplicationProject is an MVC application built using Spring framework and leverages a relational database to persist the data.
 
 ## Architecture
 ![Architecture](assets/architecture.png)
 
 ## Repository Structure
-- petclinic - Spring Boot application code. This is a clone of the spring petclinic repo. Modification includes addition of the Dockerfile. For more details review the [README](petclinic/readme.md)
-- cdk - AWS CDK Project for Building and Deploying Petclinic App. For more details review the [README](cdk/README.md)
+- PythonWebApplicationProject - Spring Boot application code. This is a clone of the spring PythonWebApplicationProject repo. Modification includes addition of the Dockerfile. For more details review the [README](PythonWebApplicationProject/readme.md)
+- cdk - AWS CDK Project for Building and Deploying PythonWebApplicationProject App. For more details review the [README](cdk/README.md)
 
 ## Configure Development Environment
 - Follow the steps in the Cloud9 Environment Setup guide - [Create-Cloud9-Environment](CLOUD9-SETUP.md)
@@ -47,21 +47,21 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
 
 6. Package the application using Apache Maven Wrapper
     ```bash
-    cd ~/environment/aws-apprunner-cdk/petclinic
+    cd ~/environment/aws-apprunner-cdk/PythonWebApplicationProject
     ./mvnw package -Dmaven.test.skip=true
     ```
 
-7. Run Petclinic application locally and run the following inside the Cloud9 terminal:
+7. Run PythonWebApplicationProject application locally and run the following inside the Cloud9 terminal:
     ```bash
     ./mvnw spring-boot:run
     ```
 
 8. Validate the launched application and preview the application running locally:
-    ![Petclinic Launch](assets/10-petclinic-preview-launch.png)
+    ![PythonWebApplicationProject Launch](assets/10-PythonWebApplicationProject-preview-launch.png)
 
-    This will run the application on port 8080. Click Preview from the top menu and then click “Preview Running Application.” It will open a browser displaying the Spring Petclinic application.
+    This will run the application on port 8080. Click Preview from the top menu and then click “Preview Running Application.” It will open a browser displaying the Spring PythonWebApplicationProject application.
 
-    ![Petclinic Preview](assets/11-petclinic-preview.png)
+    ![PythonWebApplicationProject Preview](assets/11-PythonWebApplicationProject-preview.png)
 
     Press Ctrl+C to stop the running application.
 
@@ -114,7 +114,7 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
     - View the CodePipeline using the [AWS CodePipeline console](https://console.aws.amazon.com/codepipeline).
 
 6. Validate the CI/CD Pipeline.
-    - Make a source code change in the petclinic application. Make the change to messages.properties under `petclinic/src/main/resources/messages/messages.properties`. Change the welcome value to `Welcome to CI/CD using AWS CDK`.
+    - Make a source code change in the PythonWebApplicationProject application. Make the change to messages.properties under `PythonWebApplicationProject/src/main/resources/messages/messages.properties`. Change the welcome value to `Welcome to CI/CD using AWS CDK`.
     - Commit the change and push the change to the code commit repo.
         ```bash
         cd ~/environment/aws-apprunner-cdk
@@ -131,9 +131,9 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
         cdk destroy
         ```
     - When asked whether you want to proceed with the actions, enter `y`. Wait for AWS CDK to complete the destroy.
-    - Delete the AWS CloudFormation `petclinic-deploy-*` stack from the AWS CloudFormation Console.
-    - Delete the images in the AWS ECR `petclinic` repo.
-    - Delete the AWS CloudFormation `petclinic-build-*` stack from the AWS CloudFormation Console.
+    - Delete the AWS CloudFormation `PythonWebApplicationProject-deploy-*` stack from the AWS CloudFormation Console.
+    - Delete the images in the AWS ECR `PythonWebApplicationProject` repo.
+    - Delete the AWS CloudFormation `PythonWebApplicationProject-build-*` stack from the AWS CloudFormation Console.
     - Delete the AWS Cloud9 `workshop-environment` environment including the `workshop-admin` IAM role.
     - Delete the `dockerhub_credentials` from AWS Secrets Manager.
 

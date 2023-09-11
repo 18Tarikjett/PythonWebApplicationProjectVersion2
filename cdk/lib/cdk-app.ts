@@ -44,7 +44,7 @@ export class CdkApp {
         build: {
           commands: [
             "echo Build started on `date`",
-            "cd petclinic",
+            "cd PythonWebApplicationProject",
             "./mvnw package -Dmaven.test.skip=true",
             "docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .",
             "docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest",

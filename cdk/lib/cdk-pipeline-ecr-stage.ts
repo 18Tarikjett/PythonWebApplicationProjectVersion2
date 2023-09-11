@@ -6,7 +6,7 @@ export class CdkPipelineECRStage extends Stage {
   constructor(scope: Construct, id: string, props?: StageProps) {
     super(scope, id, props);
     new CdkECRStack(this, "app", {
-      description: "Petclinic Create ECR Repo and Add Lifecycle Rules",
+      description: "PythonWebApplicationProject Create ECR Repo and Add Lifecycle Rules",
     });
   }
 }

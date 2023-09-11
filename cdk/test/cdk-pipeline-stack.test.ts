@@ -3,7 +3,7 @@ import { Template } from "aws-cdk-lib/assertions";
 import * as CdkPipeline from "../lib/cdk-pipeline-stack";
 
 test("CDK Pipeline Stack", () => {
-    const stackName = 'petclinic'
+    const stackName = 'PythonWebApplicationProject'
     const app = new cdk.App();
 
     // WHEN
