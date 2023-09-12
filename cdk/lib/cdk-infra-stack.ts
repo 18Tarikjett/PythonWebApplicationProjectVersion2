@@ -39,34 +39,34 @@ export class CdkInfraStack extends Stack {
     });
 
     /************************************************************************/
-    /***************************** MYSQLDB SG *******************************/
+    /***************************** DatabaseDB SG *******************************/
     /************************************************************************/
     const dbServerSG = new ec2.SecurityGroup(this, `${this.stackName}-rds-sg`, {
       vpc,
       allowAllOutbound: true,
-      description: "Ingress for MySQL Server",
+      description: "Ingress for Database Server",
     });
     dbServerSG.addIngressRule(
       ec2.Peer.ipv4(vpc.vpcCidrBlock),
-      ec2.Port.tcp(3306)
+      ec2.Port.tcp(5432)
     );
 
     /************************************************************************/
-    /****************************** MYSQL DB ********************************/
+    /****************************** Database DB ********************************/
     /************************************************************************/
-    const mysql = new rds.DatabaseInstance(
+    const database = new rds.DatabaseInstance(
       this,
-      `${this.stackName}-mysql-rds`,
+      `${this.stackName}-database-rds`,
       {
-        engine: rds.DatabaseInstanceEngine.mysql({
-          version: rds.MysqlEngineVersion.VER_5_7,
+        engine: rds.DatabaseInstanceEngine.postgres({
+          version: rds.PostgresEngineVersion.VER_15_3,
         }),
         instanceType: ec2.InstanceType.of(
           ec2.InstanceClass.BURSTABLE3,
           ec2.InstanceSize.SMALL
         ),
         credentials: rds.Credentials.fromGeneratedSecret(this.appName, {
-          secretName: `rds/dev/${this.appName}/mysql`,
+          secretName: `rds/dev/${this.appName}/database`,
         }),
         vpc,
         vpcSubnets: {
@@ -79,6 +79,7 @@ export class CdkInfraStack extends Stack {
         backupRetention: Duration.days(5),
         removalPolicy: cdk.RemovalPolicy.DESTROY,
         storageEncrypted: true,
+        databaseName: this.appName,
       }
     );
 
@@ -119,7 +120,7 @@ export class CdkInfraStack extends Stack {
                     this.region +
                     ":" +
                     this.account +
-                    ":repository/PythonWebApplicationProject",
+                    ":repository/PythonWebApplicationProject".toLowerCase(),
                 ],
               }),
             ],
@@ -152,25 +153,30 @@ export class CdkInfraStack extends Stack {
           },
           autoDeploymentsEnabled: true,
           imageRepository: {
-            imageIdentifier: `${this.account}.dkr.ecr.${this.region}.amazonaws.com/${this.appName}:latest`,
+            imageIdentifier: `${this.account}.dkr.ecr.${this.region}.amazonaws.com/${this.appName.toLowerCase()}:latest`,
             imageRepositoryType: "ECR",
             imageConfiguration: {
-              port: "80",
+              startCommand: "python manage.py runserver 0.0.0.0:8000",
+              port: "8000",
               runtimeEnvironmentVariables: [
                 {
-                  name: "MYSQL_USER",
+                  name: "POSTGRES_USER",
                   value: this.appName,
                 },
                 {
-                  name: "MYSQL_PASS",
-                  value: mysql.secret
-                    ? mysql.secret.secretValueFromJson("password").toString()
+                  name: "POSTGRES_PASSWORD",
+                  value: database.secret
+                    ? database.secret.secretValueFromJson("password").toString()
                     : "password",
                 },
                 {
-                  name: "MYSQL_URL",
-                  value: `jdbc:mysql://${mysql.instanceEndpoint.hostname}/${this.appName}?createDatabaseIfNotExist=true`,
+                  name: "POSTGRES_HOST",
+                  value: `jdbc:database://${database.instanceEndpoint.hostname}/${this.appName}?createdatabaseIfNotExist=true`,
                 },
+                {
+                  name: "POSTGRES_NAME",
+                  value: this.appName,
+                }
               ],
             },
           },
@@ -180,7 +186,7 @@ export class CdkInfraStack extends Stack {
           memory: "4096",
         },
         healthCheckConfiguration: {
-          path: "/actuator/health",
+          path: "/about",
         },
         networkConfiguration: {
           egressConfiguration: {

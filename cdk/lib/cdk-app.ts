@@ -25,9 +25,6 @@ export class CdkApp {
       },
       phases: {
         install: {
-          "runtime-versions": {
-            java: "corretto8",
-          },
           commands: [
             "echo running install commands...",
             "COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-8)",
@@ -45,7 +42,6 @@ export class CdkApp {
           commands: [
             "echo Build started on `date`",
             "cd PythonWebApplicationProject",
-            "./mvnw package -Dmaven.test.skip=true",
             "docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .",
             "docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest",
             "docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG",
@@ -59,9 +55,7 @@ export class CdkApp {
           ],
         },
       },
-      cache: {
-        paths: "/root/.m2/**/*",
-      },
+      cache: {},
     };
   }
 
@@ -77,7 +71,7 @@ export class CdkApp {
         value: this.stack.region,
       },
       IMAGE_REPO_NAME: {
-        value: this.stack.stackName,
+        value: this.stack.stackName.toLowerCase(),
       },
       IMAGE_TAG: {
         value: "latest",

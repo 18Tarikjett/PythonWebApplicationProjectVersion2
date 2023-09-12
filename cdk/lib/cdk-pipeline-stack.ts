@@ -88,7 +88,7 @@ export class CdkPipelineStack extends cdk.Stack {
                 "ecr:PutImage"
               ],
               resources: [
-                `arn:${this.partition}:ecr:${this.region}:${this.account}:repository/PythonWebApplicationProject`
+                `arn:${this.partition}:ecr:${this.region}:${this.account}:repository/pythonwebapplicationproject`
               ],
             }),
           ]

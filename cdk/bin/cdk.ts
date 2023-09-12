@@ -8,8 +8,8 @@ import { NagSuppressions } from 'cdk-nag';
 
 const app = new cdk.App();
 const stack = new CdkPipelineStack(app, "CdkPipelineStack", {
-  stackName: "petclinic",
-  description: "Petclinic Application",
+  stackName: "PythonWebApplicationProject",
+  description: "Python Web Application",
   env: {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION,

@@ -25,7 +25,7 @@ export class CdkECRStack extends Stack {
     /************************* Create ECR Repo ******************************/
     /************************************************************************/
     const repository = new ecr.Repository(this, `${this.stackName}-build`, {
-      repositoryName: this.appName,
+      repositoryName: this.appName.toLowerCase(),
       imageScanOnPush: true,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });

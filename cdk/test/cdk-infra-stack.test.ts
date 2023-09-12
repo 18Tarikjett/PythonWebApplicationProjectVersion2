@@ -33,8 +33,8 @@ test("CDK Infra Stage", () => {
         AllowMajorVersionUpgrade: false,
         AutoMinorVersionUpgrade: false,
         BackupRetentionPeriod: 5,
-        Engine: "mysql",
-        EngineVersion: "5.7",
+        Engine: "postgres",
+        EngineVersion: "15.3",
         MultiAZ: true,
         PubliclyAccessible: false,
         StorageEncrypted: true,
@@ -48,9 +48,9 @@ test("CDK Infra Stage", () => {
             CidrIp: "0.0.0.0/0",
         }],
         SecurityGroupIngress: [{
-            FromPort: 3306,
+            FromPort: 5432,
             IpProtocol: "tcp",
-            ToPort: 3306
+            ToPort: 5432
         }]
     });
 
@@ -58,7 +58,7 @@ test("CDK Infra Stage", () => {
     template.resourceCountIs("AWS::AppRunner::Service", 1);
     template.hasResourceProperties("AWS::AppRunner::Service", {
         HealthCheckConfiguration: {
-            Path: "/actuator/health"
+            Path: "/about"
         }
     });
     template.resourceCountIs("AWS::AppRunner::VpcConnector", 1);
