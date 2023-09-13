@@ -156,7 +156,7 @@ export class CdkInfraStack extends Stack {
             imageIdentifier: `${this.account}.dkr.ecr.${this.region}.amazonaws.com/${this.appName.toLowerCase()}:latest`,
             imageRepositoryType: "ECR",
             imageConfiguration: {
-              startCommand: "bash -c 'sleep 1000 && python manage.py runserver 0.0.0.0:8000'",
+              startCommand: "bash -c 'sleep 1000 \&\& python manage.py runserver 0.0.0.0:8000'",
               port: "8000",
               runtimeEnvironmentVariables: [
                 {
