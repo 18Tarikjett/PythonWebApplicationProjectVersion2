@@ -171,7 +171,7 @@ export class CdkInfraStack extends Stack {
                 },
                 {
                   name: "POSTGRES_HOST",
-                  value: `jdbc:database://${database.instanceEndpoint.hostname}/${this.appName}?createdatabaseIfNotExist=true`,
+                  value: database.instanceEndpoint.hostname,
                 },
                 {
                   name: "POSTGRES_NAME",
