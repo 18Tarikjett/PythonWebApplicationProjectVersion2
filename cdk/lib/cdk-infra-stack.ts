@@ -97,6 +97,15 @@ export class CdkInfraStack extends Stack {
             statements: [
               new iam.PolicyStatement({
                 effect: iam.Effect.ALLOW,
+                actions: [
+                  "secretsmanager:GetSecretValue"
+                ],
+                resources: [
+                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`
+                ]
+              }),
+              new iam.PolicyStatement({
+                effect: iam.Effect.ALLOW,
                 actions: ["ecr:GetAuthorizationToken"],
                 resources: ["*"],
               }),
@@ -158,6 +167,13 @@ export class CdkInfraStack extends Stack {
             imageConfiguration: {
               startCommand: "/code/aws_init.sh",
               port: "8000",
+              // Django superuser password retrived from secrets manager
+              runtimeEnvironmentSecrets: [
+                {
+                  name: 'DJANGO_SUPERUSER_PASSWORD',
+                  value: `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`
+                }
+              ],
               runtimeEnvironmentVariables: [
                 {
                   name: "POSTGRES_USER",
@@ -176,7 +192,15 @@ export class CdkInfraStack extends Stack {
                 {
                   name: "POSTGRES_NAME",
                   value: this.appName,
-                }
+                },
+                {
+                  name: "DJANGO_SUPERUSER_USERNAME",
+                  value: "TJAdmin",
+                },
+                {
+                  name: "DJANGO_SUPERUSER_EMAIL",
+                  value:"tarikjet01@gmail.com",
+                },
               ],
             },
           },

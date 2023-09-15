@@ -79,8 +79,16 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
         --secret-string "{\"username\":\"dockerhub_username\",\"password\":\"dockerhub_password\"}" \
         --region=$CDK_DEFAULT_REGION
     ```
+2.    Set up DockerHub Credentials in Secrets Manager for Docker Login credentials. Please provide your personal docker username (not email) and password. Note this step demonstrates the use of Docker Hub and provides an example on how to leverage the private registries to be included in the pipeline using Secrets Manager. 
+        ```bash
+        cd ~/environment/aws-apprunner-cdk
+        aws secretsmanager create-secret \
+            --name django_superuser_password \
+            --description "Django super user password" \
+            --secret-string "superusersarereallypowerful_dontmesswiththem" 
+            --region=$CDK_DEFAULT_REGION
 
-2. Deploy Step Phase 1: Create Code Commit Repo
+3. Deploy Step Phase 1: Create Code Commit Repo
     - Setup the Code Commit Repo. 
         ```bash
         cd ~/environment/aws-apprunner-cdk/cdk
@@ -90,7 +98,7 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
         ![CDK Deploy](assets/12-c9-cdk-deploy.png)
     - Wait for AWS CDK to complete the deployment before proceeding. It will take few minutes to complete “cdk deploy”. Pipeline will fail since the code is not available in code commit repo.
 
-3. Deploy Step Phase 2: Enable CI/CD Pipeline and deploy infrastructure and application.
+4. Deploy Step Phase 2: Enable CI/CD Pipeline and deploy infrastructure and application.
     - Commit the code and set the origin to the code commit repo that was created.
         ```bash
         cd ~/environment/aws-apprunner-cdk
@@ -102,18 +110,18 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
     - Initial deployment will take longer since this includes building the container image for the application and setting up the infrastructure that includes Networking, RDS and other dependent components.
     - Explore the deployment progress on the CloudFormation console.
 
-4. Validate the Deployment.
+5. Validate the Deployment.
     - Once the deploy is complete, you can review the repo in App Runner service using the AWS console. 
     - View the App Runner service using the [AWS App Runner console](https://console.aws.amazon.com/apprunner/)
 
-5. Review the deployed stack.
+6. Review the deployed stack.
     - View the RDS database using the [Amazon RDS console](https://console.aws.amazon.com/rds).
     - View the ECR repo using the [Amazon ECR console](https://console.aws.amazon.com/ecr).
     - View the CodeCommit repo using the [AWS CodeCommit console](https://console.aws.amazon.com/codecommit).
     - View the CodeBuild project using the [AWS CodeBuild console](https://console.aws.amazon.com/codebuild).
     - View the CodePipeline using the [AWS CodePipeline console](https://console.aws.amazon.com/codepipeline).
 
-6. Validate the CI/CD Pipeline.
+7. Validate the CI/CD Pipeline.
     - Make a source code change in the PythonWebApplicationProject application. Make the change to messages.properties under `PythonWebApplicationProject/src/main/resources/messages/messages.properties`. Change the welcome value to `Welcome to CI/CD using AWS CDK`.
     - Commit the change and push the change to the code commit repo.
         ```bash
@@ -124,7 +132,7 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
     - Review that the commit started the code pipeline build. It will take approximately 10 minutes to deploy the change which includes building a new image and deploying the latest version to AWS AppRunner.
     - Once the deploy is complete, you can refresh the application home page and you should see the change reflected on the home page.
 
-7. Cleaning Up.
+8. Cleaning Up.
     - Delete the AWS CDK stack.
         ```
         cd ~/environment/aws-apprunner-cdk/cdk
