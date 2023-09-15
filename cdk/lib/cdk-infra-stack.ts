@@ -97,6 +97,15 @@ export class CdkInfraStack extends Stack {
             statements: [
               new iam.PolicyStatement({
                 effect: iam.Effect.ALLOW,
+                actions: [
+                  "secretsmanager:GetSecretValue",
+                ],
+                resources: [
+                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`,
+                ]
+              }),
+              new iam.PolicyStatement({
+                effect: iam.Effect.ALLOW,
                 actions: ["ecr:GetAuthorizationToken"],
                 resources: ["*"],
               }),
