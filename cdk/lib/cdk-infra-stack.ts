@@ -98,10 +98,10 @@ export class CdkInfraStack extends Stack {
               new iam.PolicyStatement({
                 effect: iam.Effect.ALLOW,
                 actions: [
-                  "secretsmanager:GetSecretValue"
+                  "secretsmanager:GetSecretValue",
                 ],
                 resources: [
-                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`
+                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`,
                 ]
               }),
               new iam.PolicyStatement({
@@ -208,6 +208,7 @@ export class CdkInfraStack extends Stack {
         instanceConfiguration: {
           cpu: "2048",
           memory: "4096",
+          instanceRoleArn: appRunnerRole.roleArn,
         },
         healthCheckConfiguration: {
           path: "/about",
