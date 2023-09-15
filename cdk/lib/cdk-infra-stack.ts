@@ -97,15 +97,6 @@ export class CdkInfraStack extends Stack {
             statements: [
               new iam.PolicyStatement({
                 effect: iam.Effect.ALLOW,
-                actions: [
-                  "secretsmanager:GetSecretValue",
-                ],
-                resources: [
-                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`,
-                ]
-              }),
-              new iam.PolicyStatement({
-                effect: iam.Effect.ALLOW,
                 actions: ["ecr:GetAuthorizationToken"],
                 resources: ["*"],
               }),
@@ -131,6 +122,30 @@ export class CdkInfraStack extends Stack {
                     this.account +
                     ":repository/PythonWebApplicationProject".toLowerCase(),
                 ],
+              }),
+            ],
+          }),
+        },
+      }
+    );
+    
+    const appRunnerInstanceRole = new iam.Role(
+      this,
+      `${this.stackName}-apprunner-instance-role`,
+      {
+        assumedBy: new iam.ServicePrincipal("tasks.apprunner.amazonaws.com"),
+        description: `${this.stackName}-apprunner-instance-role`,
+        inlinePolicies: {
+          "PythonWebApplicationProject-apprunner-instance-policy": new iam.PolicyDocument({
+            statements: [
+              new iam.PolicyStatement({
+                effect: iam.Effect.ALLOW,
+                actions: [
+                  "secretsmanager:GetSecretValue",
+                ],
+                resources: [
+                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`,
+                ]
               }),
             ],
           }),
@@ -208,7 +223,7 @@ export class CdkInfraStack extends Stack {
         instanceConfiguration: {
           cpu: "2048",
           memory: "4096",
-          instanceRoleArn: appRunnerRole.roleArn,
+          instanceRoleArn: appRunnerInstanceRole.roleArn,
         },
         healthCheckConfiguration: {
           path: "/about",

@@ -85,7 +85,7 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
         aws secretsmanager create-secret \
             --name django_superuser_password \
             --description "Django super user password" \
-            --secret-string "superusersarereallypowerful_dontmesswiththem" 
+            --secret-string "superuser_password" \ 
             --region=$CDK_DEFAULT_REGION
 
 3. Deploy Step Phase 1: Create Code Commit Repo
