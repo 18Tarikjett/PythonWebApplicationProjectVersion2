@@ -101,7 +101,7 @@ export class CdkInfraStack extends Stack {
                   "secretsmanager:GetSecretValue",
                 ],
                 resources: [
-                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`,
+                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password-??????`,
                 ]
               }),
               new iam.PolicyStatement({
@@ -153,7 +153,7 @@ export class CdkInfraStack extends Stack {
                   "secretsmanager:GetSecretValue",
                 ],
                 resources: [
-                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password`,
+                  `arn:${this.partition}:secretsmanager:${this.region}:${this.account}:secret:django_superuser_password-??????`,
                 ]
               }),
             ],
