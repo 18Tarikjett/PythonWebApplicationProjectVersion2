@@ -2,15 +2,28 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <h2>Current tickets in progress</h2>
-      <u1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Ticket ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">Problem</th>
+          <th scope="col">Status</th>
+          <th scope="col">Creation date</th>
+          <th scope="col">Update Ticket</th>
+        </tr>
+      </thead>
+      <tbody>
         {% for ticket in tickets %}
-        <li>
-            <strong>{{ ticket.Title }}</strong>
-            {{ticket.pk}}
-            Problem description: {{ticket.Problem}}<br>
-            Status: {{ticket.Status}}<br>
-            Creation Date: {{ticket.TicketCreationDate}}<br>
-            <a href="{{ticket.pk}}/update/">Update</a>
-        </li>
-        {% endfor %}     
+        <tr>
+          <td>{{ ticket.pk }}</td>
+          <th scope="row">{{ ticket.Title }}</th>
+          <td>{{ticket.Problem}}</td>
+          <td>{{ ticket.Status }}</td>
+          <td>{{ticket.TicketCreationDate}}</td>
+          <td><a href="{{ticket.pk}}/update/">Update</a></td>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
 {% endblock content %}

@@ -32,7 +32,7 @@ def CreateTicket(request):
             ticket_form.user = request.user
             ticket = ticket_form.save()
             messages.success(request, f'{ticket} has been created.')
-            return redirect('display_ticket.html', pk=ticket.pk)    
+            return redirect('../tickets/', pk=ticket.pk)    
     else:
         ticket_form = TicketCreationForm()
     return render(request, 'create_ticket.html', {'form' : ticket_form})
@@ -85,12 +85,3 @@ class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         else:
             return False
-
-    
-    
-
-
-@login_required
-def DeleteTicket(request):
-    if request.method == 'POST':
-        ticket_form = TicketCreationForm(request.POST, user=request.user)
