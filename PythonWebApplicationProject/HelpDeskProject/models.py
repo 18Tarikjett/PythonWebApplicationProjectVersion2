@@ -11,17 +11,29 @@ critical_level = [
     ('CRIT','Critical'),
 ]
 
-class Post(models.Model): 
-    ticket_problem = models.CharField(max_length=100)
-    problem_content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    ticket_level = models.CharField(max_length=20,
-                                    choices=critical_level,
-                                    default='MIN')
-    ticket_employee = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.ticket_problem
+posts = [
+    {
+        'author': 'Tarik Ozturk',
+        'title':'Help Desk ticket service for hardware and software.',
+        'content':'This web page is for all employees that may have encountered issues with their hardware or software',
+        'date_posted':'August 22nd 2023'
+    },
+
+    {
+        'author': 'Tarik Ozturk',
+        'title':'Criteria for the tickets.',
+        'content':
+        """
+        The criteria for the tickets are as follows: 
+            Minor - The least critical level, the problem is not very serious. 
+            Major - The problem needs to be solved as soon as possible. 
+            Critical - The problem is a top priority and must be immediately resolved.
+        """,
+        'date_posted':'August 22nd 2023'
+
+    }
+]
 
 
 

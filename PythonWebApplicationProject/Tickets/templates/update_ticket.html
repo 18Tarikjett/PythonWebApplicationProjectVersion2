@@ -1,0 +1,10 @@
+{% extends "home/base.html"%}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Update ticket</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type='Submit'>Update ticket with new details</button>
+    </form>
+{% endblock content %}

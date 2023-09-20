@@ -3,10 +3,9 @@
 {% block content %}
 <div class="content-section">
     <form method="POST">
-        {% csrf_token%}
-        {{ form.as_p }}
+        {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Create a new ticket></legend>
+            <legend class="border-bottom mb-4">Create a new ticket</legend>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">

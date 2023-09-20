@@ -36,7 +36,13 @@
                           <a class="nav-link active" aria-current="page" href="{% url 'Users-logout'%}">Logout</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="{% url 'Ticket'%}">Create a ticket</a>
+                          <a class="nav-link active" aria-current="page" href="{% url 'create-ticket'%}">Create a ticket</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="{% url 'tickets'%}">Display tickets</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active" aria-current="page" href="{url 'update-ticket'}">Update tickets</a>
                         </li>
                         {% else %}
                         <li class="nav-item">

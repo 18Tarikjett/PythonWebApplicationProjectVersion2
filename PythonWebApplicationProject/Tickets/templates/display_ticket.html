@@ -1,0 +1,16 @@
+{% extends "home/base.html"%}
+{% load crispy_forms_tags %}
+{% block content %}
+    <h2>Current tickets in progress</h2>
+      <u1>
+        {% for ticket in tickets %}
+        <li>
+            <strong>{{ ticket.Title }}</strong>
+            {{ticket.pk}}
+            Problem description: {{ticket.Problem}}<br>
+            Status: {{ticket.Status}}<br>
+            Creation Date: {{ticket.TicketCreationDate}}<br>
+            <a href="{{ticket.pk}}/update/">Update</a>
+        </li>
+        {% endfor %}     
+{% endblock content %}
