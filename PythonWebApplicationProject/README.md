@@ -30,6 +30,15 @@ It is highly recommended that you create a virtual environment for this project 
 Your environment will need docker compose if you do not have it already, the installation guide for docker compose can be found here: https://docs.docker.com/compose/install/
 
 
+**ALL CDK FILES ARE NOT MY OWN, I HAVE ONLY MADE MINOR ADJUSTMENTS NECESSARY TO RUN MY CODE, ALL RIGHTS GO TO THEIR RESPECTIVE OWNERS**
+
+Usage of the AWS pipeline was based upon the AWS petclinic sample which utilises cdk.
+
+cdk petclinic sample and guide can be found here: https://github.com/aws-samples/aws-apprunner-cdk#license
+
+all adjustments made by me were minor and necessary in order to host the python web application
+
+
 **SETUP**
 
 1. Clone the repository using {git clone https://github.com/18Tarikjett/PythonWebApplicationProject.git}

@@ -18,6 +18,7 @@ class Ticket(models.Model):
 
      def __str__(self):
           return self.Title
-     
+          
+     #The absolute url is retrieved in order to get all information about a page, which includes the primary key in this case.
      def get_absolute_url(self):
           return reverse('ticket-detail', kwargs={'pk': self.pk})

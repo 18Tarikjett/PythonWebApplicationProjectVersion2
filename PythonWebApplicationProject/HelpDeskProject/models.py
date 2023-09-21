@@ -11,6 +11,7 @@ critical_level = [
     ('CRIT','Critical'),
 ]
 
+#The base posts that will be displayed within the home page and about page
 
 posts = [
     {

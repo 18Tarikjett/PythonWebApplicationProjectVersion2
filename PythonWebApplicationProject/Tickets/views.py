@@ -53,7 +53,7 @@ class TicketListView(ListView):
     ordering = ['-date-posted']
 
 
-
+#This view gives a more in depth view of an individual ticket
 class TicketDetailView(DetailView):
     model = Ticket
     template_name = 'ticket_detail.html'
