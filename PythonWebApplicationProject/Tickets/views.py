@@ -56,6 +56,7 @@ class TicketListView(ListView):
 
 class TicketDetailView(DetailView):
     model = Ticket
+    template_name = 'ticket_detail.html'
 
 
 
