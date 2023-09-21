@@ -20,8 +20,9 @@ from .models import Ticket
 # Create your views here.
 
 # This ticket view imports from forms, which then imports from ticket class.
-# The Ticket view has Create and Display ticket.
-# Update is in progress 
+# The Ticket view has Create and Display ticket functions which utilize the ticket class form, as data is being inputted which forms handle. 
+# Updating a ticket or deleting however, is mainly implemented within the views.py file in django
+
 
 @login_required
 def CreateTicket(request):
@@ -58,6 +59,8 @@ class TicketDetailView(DetailView):
 
 
 
+#The TicketUpdateViw class utilizes the LoginRequiredMixin, UserPassesTestMixin as authentication mixins and UpdateView as a django view. 
+
 class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Ticket 
     fields = ['Title', 'Problem', 'Status']
@@ -67,6 +70,7 @@ class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
+    #The Ticket should only be able to be updated by the user that created the ticket. 
     def test_func(self):
         ticket = self.get_object()
         if self.request.user == ticket.user:
@@ -77,8 +81,7 @@ class TicketUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Ticket
-
-
+    
     def test_func(self):
         ticket = self.get_object()
         if self.request.user == ticket.user:
