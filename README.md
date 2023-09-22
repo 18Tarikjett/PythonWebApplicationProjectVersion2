@@ -45,23 +45,11 @@ Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Regis
     npm install @types/node
     ```
 
-6. Package the application using Apache Maven Wrapper
+6. Run PythonWebApplicationProject application locally and run the following inside the Cloud9 terminal:
     ```bash
     cd ~/environment/aws-apprunner-cdk/PythonWebApplicationProject
-    ./mvnw package -Dmaven.test.skip=true
+    docker compose up
     ```
-
-7. Run PythonWebApplicationProject application locally and run the following inside the Cloud9 terminal:
-    ```bash
-    ./mvnw spring-boot:run
-    ```
-
-8. Validate the launched application and preview the application running locally:
-    ![PythonWebApplicationProject Launch](assets/10-PythonWebApplicationProject-preview-launch.png)
-
-    This will run the application on port 8080. Click Preview from the top menu and then click “Preview Running Application.” It will open a browser displaying the Spring PythonWebApplicationProject application.
-
-    ![PythonWebApplicationProject Preview](assets/11-PythonWebApplicationProject-preview.png)
 
     Press Ctrl+C to stop the running application.
 
