@@ -41,13 +41,9 @@ all adjustments made by me were minor and necessary in order to host the python 
 
 **SETUP**
 
-1. Clone the repository using {git clone https://github.com/18Tarikjett/PythonWebApplicationProject.git}
+1. Clone the repository using `git clone https://github.com/18Tarikjett/PythonWebApplicationProject.git`
 
-2. Set up a virtual environment with python using {python3 -m venv .venv}
-
-3. Activate the virtual environment using {. .venv/bin/activate}
-
-4. Install the requirements using {pip install -r requirements.txt}
+2. Run the command: `docker compose up`  
 
 
 
