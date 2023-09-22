@@ -39,16 +39,16 @@ cdk petclinic sample and guide can be found here: https://github.com/aws-samples
 all adjustments made by me were minor and necessary in order to host the python web application
 
 
-## Build and Deploy Spring PythonWebApplicationProject Application to AWS App Runner using AWS CDK.
+## Build and Deploy Django PythonWebApplicationProject Application to AWS App Runner using AWS CDK.
 
 ## Overview
-Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Registry, AWS CodePipeline, AWS CodeCommit, AWS CodeBuild, AWS CodeDeploy and AWS CDK to deploy infrastructure as code and build out a CI/CD pipeline. We will use Spring Boot PythonWebApplicationProject application as a sample app to demonstrate the CI/CD pipeline. PythonWebApplicationProject is an MVC application built using Spring framework and leverages a relational database to persist the data.
+Leverage AWS services AWS App Runner, Amazon RDS, Amazon Elastic Container Registry, AWS CodePipeline, AWS CodeCommit, AWS CodeBuild, AWS CodeDeploy and AWS CDK to deploy infrastructure as code and build out a CI/CD pipeline. We will use Django PythonWebApplicationProject application as a sample app to demonstrate the CI/CD pipeline. PythonWebApplicationProject is an MVC application built using Django framework and leverages a relational database to persist the data.
 
 ## Architecture
 ![Architecture](assets/architecture.png)
 
 ## Repository Structure
-- PythonWebApplicationProject - Spring Boot application code. This is a clone of the spring PythonWebApplicationProject repo. Modification includes addition of the Dockerfile. For more details review the [README](PythonWebApplicationProject/readme.md)
+- PythonWebApplicationProject - Django application code. This is a clone of the Django PythonWebApplicationProject repo. Modification includes addition of the Dockerfile. For more details review the [README](PythonWebApplicationProject/readme.md)
 - cdk - AWS CDK Project for Building and Deploying PythonWebApplicationProject App. For more details review the [README](cdk/README.md)
 
 ## Configure Development Environment
