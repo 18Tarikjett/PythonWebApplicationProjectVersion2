@@ -63,7 +63,7 @@ export class CdkInfraStack extends Stack {
         }),
         instanceType: ec2.InstanceType.of(
           ec2.InstanceClass.BURSTABLE3,
-          ec2.InstanceSize.SMALL
+          ec2.InstanceSize.MICRO
         ),
         credentials: rds.Credentials.fromGeneratedSecret(this.appName, {
           secretName: `rds/dev/${this.appName}/database`,
