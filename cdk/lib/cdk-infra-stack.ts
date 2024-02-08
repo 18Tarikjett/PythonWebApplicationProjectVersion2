@@ -75,7 +75,7 @@ export class CdkInfraStack extends Stack {
         autoMinorVersionUpgrade: false,
         allowMajorVersionUpgrade: false,
         securityGroups: [dbServerSG],
-        multiAz: true,
+        multiAz: false,
         backupRetention: Duration.days(5),
         removalPolicy: cdk.RemovalPolicy.DESTROY,
         storageEncrypted: true,
