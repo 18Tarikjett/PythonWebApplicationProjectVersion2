@@ -129,7 +129,7 @@ export class CdkInfraStack extends Stack {
                     this.region +
                     ":" +
                     this.account +
-                    ":repository/PythonWebApplicationProject".toLowerCase(),
+                    ":repository/PythonWebApplicationProject",
                 ],
               }),
             ],
