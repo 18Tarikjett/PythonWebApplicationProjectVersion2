@@ -44,4 +44,4 @@ class TicketTest(TestCase):
         ticket_vuln.save()
         
         #Verifies that the injection attack hasn't affected the database. 
-        self.assertTrue(Ticket.objects.filter(title=sql_injection_input))
+        self.assertTrue(Ticket.objects.filter(title=sql_injection_input).exists())

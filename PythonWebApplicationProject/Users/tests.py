@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
+from unittest.mock import patch
 
 
 # Create your tests here.
@@ -15,20 +16,24 @@ class URLTests(TestCase):
         
     def user_setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user(username='RandomUser', password='testpass')
+        
         
     def tearDown(self):
         self.user.delete()
     
     def test_unauthorised_user(self):
-        response = self.client.get(reverse('views'))
+        response = self.client.get(reverse('profile'))
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/Users/views/login')
-        
+        self.assertRedirects(response, '/Users/views/register')
+    
+    #The patch decorator means that a mock authentication is used for a mock user instead of a real one.
+    @patch('django.contrib.auth.authenticate')    
     def test_authorised_user(self):
-        self.client.login(username='RandomUser', password='testpass')
+        #Mock authenticate returns a mock or fake user object. This means that even fake users don't exist within the code.
+        mock_user = mock.authenticate.return_value
+        mock_user.is_authenticated = True
         
-        response = self.client.get(reverse('views'))
+        response = self.client.get(reverse('profile'))
         
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'profile.html')
